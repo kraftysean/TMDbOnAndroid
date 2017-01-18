@@ -3,6 +3,8 @@ package com.example.android.movies;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +22,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mMovieData;
+    private RecyclerView mRecyclerView;
+    private MovieAdapter mMovieAdapter;
     private TextView mErrorMessage;
     private ProgressBar mLoadingIndicator;
 
@@ -29,15 +32,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMovieData = (TextView) findViewById(R.id.tv_movie_results_json);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_movies);
         mErrorMessage = (TextView) findViewById(R.id.tv_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mMovieAdapter = new MovieAdapter();
+        mRecyclerView.setAdapter(mMovieAdapter);
 
         loadMovieData();
     }
 
     private void loadMovieData() {
-        new FetchMoviesTask().execute(NetworkUtils.POPULAR_TAG);
+        showMovieDataView();
+        new FetchMoviesTask().execute(NetworkUtils.POPULAR_ENDPOINT);
     }
 
     @Override
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, String[]> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -67,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected Movie[] doInBackground(String... params) {
             if (params.length == 0)
                 return null;
 
@@ -78,36 +88,35 @@ public class MainActivity extends AppCompatActivity {
                 String jsonMovieResponse = NetworkUtils
                         .getResponseFromHttpUrl(movieRequestUrl);
 
-                String[] simpleJsonMovieData = MovieJsonUtils
+                Movie[] simpleJsonMovieData = MovieJsonUtils
                         .getSimpleMovieStringsFromJson(MainActivity.this, jsonMovieResponse);
+
                 return simpleJsonMovieData;
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String[] movieData) {
+        protected void onPostExecute(Movie[] movieData) {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             if(movieData != null) {
-                showJsonDataView();
-                for (String movie : movieData)
-                    mMovieData.append(movie + "\n\n");
+                showMovieDataView();
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX " + movieData[0].toString());
+                mMovieAdapter.setMovieData(movieData);
             } else
                 showErrorMessage();
         }
     }
 
-    private void showJsonDataView() {
+    private void showMovieDataView() {
         mErrorMessage.setVisibility(View.INVISIBLE);
-        mMovieData.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     private void showErrorMessage() {
-        mMovieData.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessage.setVisibility(View.VISIBLE);
     }
 }

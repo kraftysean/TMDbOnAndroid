@@ -3,4 +3,5 @@
     <string name="search_popular">Popular</string>
     <string name="search_top_rated">Top Rated</string>
     <string name="error_message">Unable to load data from https://www.theMovieDB.org.\n\nPlease try again later.</string>
+    <string name="thumbnail_description"><![CDATA[<poster_thumbnail>]]></string>
 </resources>

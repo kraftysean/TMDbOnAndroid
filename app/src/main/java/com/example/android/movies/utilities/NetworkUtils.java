@@ -16,26 +16,24 @@ public class NetworkUtils {
 
     private final static String TAG = NetworkUtils.class.getSimpleName();
 
-    private final static String MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3/movie";
+    private final static String MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3";
 
-    private final static String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p";
+    public final static String POPULAR_ENDPOINT = "movie/popular";
 
-    public final static String POPULAR_TAG = "popular";
-
-    public final static String TOP_RATED_TAG = "top_rated";
+    public final static String TOP_RATED_ENDPOINT = "movie/top_rated";
 
     final static String API_KEY = "api_key";
     final static String PAGE = "page";
     /**
      * This method returns the entire result from the HTTP response.
      *
-     * @param sortOrderTag The sort order required to fetch the HTTP response from.
+     * @param endpint The sort order required to fetch the HTTP response from.
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
 
-    public static URL buildURL(String sortOrderTag) {
-        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + "/" + sortOrderTag).buildUpon()
+    public static URL buildURL(String endpint) {
+        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + "/" + endpint).buildUpon()
                 .appendQueryParameter(API_KEY, MoviePreferences.API_KEY)
                 .build();
 
