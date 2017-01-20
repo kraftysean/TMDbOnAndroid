@@ -18,6 +18,8 @@ public class NetworkUtils {
 
     private final static String MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3";
 
+    public final static String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185";
+
     public final static String POPULAR_ENDPOINT = "movie/popular";
 
     public final static String TOP_RATED_ENDPOINT = "movie/top_rated";
@@ -27,13 +29,13 @@ public class NetworkUtils {
     /**
      * This method returns the entire result from the HTTP response.
      *
-     * @param endpint The sort order required to fetch the HTTP response from.
+     * @param endpoint The sort order required to fetch the HTTP response from.
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
 
-    public static URL buildURL(String endpint) {
-        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + "/" + endpint).buildUpon()
+    public static URL buildURL(String endpoint) {
+        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + "/" + endpoint).buildUpon()
                 .appendQueryParameter(API_KEY, MoviePreferences.API_KEY)
                 .build();
 

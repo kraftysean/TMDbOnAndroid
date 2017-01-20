@@ -12,8 +12,6 @@ import org.json.JSONObject;
 
 public final class MovieJsonUtils {
 
-    private final static String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p";
-
     public static Movie[] getSimpleMovieStringsFromJson(Context context, String movieJsonStr) throws JSONException {
         /* String array to hold data about each movie */
         Movie[] parsedMovieData = null;
