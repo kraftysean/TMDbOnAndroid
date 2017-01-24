@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.movies.utilities.MovieJsonUtils;
 import com.example.android.movies.utilities.NetworkUtils;
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     private TextView mErrorMessage;
     private ProgressBar mLoadingIndicator;
     private Movie[] mMovies;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +63,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_search_popular) {
-            Toast.makeText(this, "Popular selected", Toast.LENGTH_SHORT).show();
             loadMovieData(NetworkUtils.POPULAR_ENDPOINT);
             return true;
         }
         if(item.getItemId() == R.id.action_search_top_rated) {
-            Toast.makeText(this, "Top Rated selected", Toast.LENGTH_SHORT).show();
             loadMovieData(NetworkUtils.TOP_RATED_ENDPOINT);
             return true;
         }
@@ -115,14 +110,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             URL movieRequestUrl = NetworkUtils.buildURL(endpoint);
 
             try {
-                String jsonMovieResponse = NetworkUtils
-                        .getResponseFromHttpUrl(movieRequestUrl);
+                String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
 
-                Movie[] simpleJsonMovieData = MovieJsonUtils
-                        .getSimpleMovieStringsFromJson(MainActivity.this, jsonMovieResponse);
-
-                mMovies = simpleJsonMovieData;
-                return simpleJsonMovieData;
+                mMovies = MovieJsonUtils.getSimpleData(MainActivity.this, jsonMovieResponse);
+                return mMovies;
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }

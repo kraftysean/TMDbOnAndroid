@@ -35,11 +35,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder viewHolder, int position) {
+        viewHolder.mListItemTitle.setText(mMovieData[position].getTitle());
         String posterUrl = NetworkUtils.MOVIE_DB_IMAGE_BASE_URL + mMovieData[position].getPosterPath();
         Log.v("POSTER_URL", posterUrl);
         Picasso.with(context).load(posterUrl).into(viewHolder.mListItemPoster);
-        viewHolder.mListItemTitle.setText("");
-
     }
 
     @Override
@@ -74,8 +73,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     public interface ListItemClickListener {
-
         void onListItemClick(int listItemIndex);
     }
-
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/iv_item_poster"
@@ -15,6 +16,12 @@
     <TextView
         android:id="@+id/tv_item_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingTop="6dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:background="@drawable/gradient"/>
 
-</RelativeLayout>
+</FrameLayout>

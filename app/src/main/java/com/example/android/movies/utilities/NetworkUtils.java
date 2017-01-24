@@ -16,13 +16,10 @@ public class NetworkUtils {
 
     private final static String TAG = NetworkUtils.class.getSimpleName();
 
-    private final static String MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3";
-
-    public final static String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185";
-
-    public final static String POPULAR_ENDPOINT = "movie/popular";
-
-    public final static String TOP_RATED_ENDPOINT = "movie/top_rated";
+    public final static String MOVIE_DB_BASE_URL = "https://api.themoviedb.org/3/movie/";
+    public final static String MOVIE_DB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185/";
+    public final static String POPULAR_ENDPOINT = "popular";
+    public final static String TOP_RATED_ENDPOINT = "top_rated";
 
     final static String API_KEY = "api_key";
     final static String PAGE = "page";
@@ -35,7 +32,7 @@ public class NetworkUtils {
      */
 
     public static URL buildURL(String endpoint) {
-        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + "/" + endpoint).buildUpon()
+        Uri builltUri = Uri.parse(MOVIE_DB_BASE_URL + endpoint).buildUpon()
                 .appendQueryParameter(API_KEY, MoviePreferences.API_KEY)
                 .build();
 

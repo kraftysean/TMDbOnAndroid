@@ -4,35 +4,61 @@ import java.io.Serializable;
 
 public class Movie implements Serializable{
 
-    private String title;
-    private String overview;
-    private String posterPath;
+    private String backdropPath;
+    private int budget;
+    private int id;
+    private String imdbId;
+    private String originalLanguage;
     private String originalTitle;
+    private String overview;
+    private int popularity;
+    private String posterPath;
     private String releaseDate;
-    private String userRating;
+    private int revenue;
+    private int runtime;
+    private String tagline;
+    private String title;
+    private int voteAverage;
+    private int voteCount;
 
-    public String getTitle() {
-        return title;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
-    public String getOverview() {
-        return overview;
+    public int getBudget() {
+        return budget;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setBudget(int budget) {
+        this.budget = budget;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public int getId() {
+        return id;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 
     public String getOriginalTitle() {
@@ -43,6 +69,30 @@ public class Movie implements Serializable{
         this.originalTitle = originalTitle;
     }
 
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
     public String getReleaseDate() {
         return releaseDate;
     }
@@ -51,12 +101,52 @@ public class Movie implements Serializable{
         this.releaseDate = releaseDate;
     }
 
-    public String getUserRating() {
-        return userRating;
+    public int getRevenue() {
+        return revenue;
     }
 
-    public void setUserRating(String userRating) {
-        this.userRating = userRating;
+    public void setRevenue(int revenue) {
+        this.revenue = revenue;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(int voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 
     @Override
