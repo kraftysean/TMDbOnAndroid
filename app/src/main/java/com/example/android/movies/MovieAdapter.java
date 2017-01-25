@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.android.movies.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
@@ -35,7 +34,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder viewHolder, int position) {
-        viewHolder.mListItemTitle.setText(mMovieData[position].getTitle());
         String posterUrl = NetworkUtils.MOVIE_DB_IMAGE_BASE_URL + mMovieData[position].getPosterPath();
         Log.v("POSTER_URL", posterUrl);
         Picasso.with(context).load(posterUrl).into(viewHolder.mListItemPoster);
@@ -55,13 +53,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mListItemTitle;
         private ImageView mListItemPoster;
 
         public MovieAdapterViewHolder(View itemView) {
             super(itemView);
             mListItemPoster = (ImageView) itemView.findViewById(R.id.iv_item_poster);
-            mListItemTitle = (TextView) itemView.findViewById(R.id.tv_item_title);
             itemView.setOnClickListener(this);
         }
 

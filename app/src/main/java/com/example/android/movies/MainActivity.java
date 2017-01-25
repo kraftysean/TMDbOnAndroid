@@ -49,8 +49,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         loadMovieData(NetworkUtils.POPULAR_ENDPOINT);
     }
 
+
     private void loadMovieData(String endpoint) {
+        // Makes an async API call to get the data from the website
         new FetchMoviesTask().execute(endpoint);
+
         showMovieDataView();
     }
 
@@ -75,12 +78,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 
     @Override
     public void onListItemClick(int listItemIndex) {
-        Context context = MainActivity.this;
-        Class destinationActivity = DetailActivity.class;
-
-        Intent startChildActivityIntent = new Intent(context, destinationActivity);
-
-        startChildActivityIntent.putExtra(Intent.EXTRA_TEXT, mMovies[listItemIndex]);
+        Intent startChildActivityIntent = new Intent(this, DetailActivity.class);
+        startChildActivityIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(mMovies[listItemIndex].getId()));
         startActivity(startChildActivityIntent);
     }
 
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessage.setVisibility(View.VISIBLE);
     }
+
 
     public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
         @Override
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             mLoadingIndicator.setVisibility(View.INVISIBLE);
 
             if(movieData != null) {
-                mMovieAdapter.setMovieData(movieData);
+                mMovieAdapter.setMovieData(movieData);  // Call adapter to set the data in the list
                 showMovieDataView();
             } else
                 showErrorMessage();

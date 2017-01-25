@@ -51,13 +51,13 @@ public class DetailActivity extends AppCompatActivity {
         Intent intentThatStartedThisActivity = getIntent();
 
         if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
-            Movie movie = (Movie) intentThatStartedThisActivity.getSerializableExtra(Intent.EXTRA_TEXT);
-            loadMovieData(movie);
+            String movieId = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
+            loadMovieData(movieId);
         }
     }
 
-    private void loadMovieData(Movie movie) {
-        new FetchMovieDetailsTask().execute(String.valueOf(movie.getId()));
+    private void loadMovieData(String movieId) {
+        new FetchMovieDetailsTask().execute(String.valueOf(movieId));
         showMovieDataView();
     }
 
